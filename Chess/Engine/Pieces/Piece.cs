@@ -31,7 +31,7 @@ namespace Engine.Pieces
 		{
 			if (target.Piece == null || this.White != target.Piece.White)
 				// You cannot check yourself, so a king move ais always safe, otherwise we're not going to calculate.
-				moves.Add(new Move(this.Field.File, this.Field.Rank, target.File, target.Rank, this.White, this.White != target.Piece.White, this is King ? KingStatus.Safe : KingStatus.Unknown, this.Letter()));
+				moves.Add(new Move(this.Field.File, this.Field.Rank, target.File, target.Rank, this.White, target.Piece != null && this.White != target.Piece.White, this is King ? KingStatus.Safe : KingStatus.Unknown, this.Letter()));
 		}
 
 		public void GetMovesDiagonally(List<Move> moves)
