@@ -127,7 +127,7 @@ namespace Engine.Pieces
 			}
 		}
 
-		public static bool CanFieldBeAttacked(Field target)
+		public static bool CanFieldBeAttacked(Field target, King king)
 		{
 			var white = Board.Active.WhiteToMove == false;
 			var direction = white ? 1 : -1;
@@ -175,7 +175,7 @@ namespace Engine.Pieces
 				{
 					var first = true;
 					var piece = Board.Active.Fields[file, rank].Piece;
-					if (piece != null)
+					if (piece != null && piece != king)
 					{
 						if (piece.White == white && ((straight ? piece is Rook : piece is Bishop) || piece is Queen || (first && piece is King)))
 							return true;

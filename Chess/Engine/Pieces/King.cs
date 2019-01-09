@@ -29,7 +29,7 @@ namespace Engine.Pieces
 				if (rank >= 0 && rank < Board.Size && file >= 0 && file < Board.Size)
 				{
 					var target = Board.Active.Fields[file, rank];
-					if (Piece.CanFieldBeAttacked(target) == false)
+					if (Piece.CanFieldBeAttacked(target, this) == false)
 						this.MakeMove(target, moves);
 				}
 			}
