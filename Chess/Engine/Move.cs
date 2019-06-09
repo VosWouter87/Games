@@ -64,13 +64,13 @@ namespace Engine
 				this.Letter = char.IsUpper(fullNotation[notationIndex]) ? fullNotation[notationIndex++] : ' ';
 
 				this.StartFile = (byte)(fullNotation[notationIndex++] - Constants.FileLetterOffset);
-				this.StartRank = (byte)(fullNotation[notationIndex++] - Constants.RankNumberOffset);
+				this.StartRank = (byte)(fullNotation[notationIndex++] - Constants.RankNumberOffset - 1);
 
 				var startField = board.Fields[this.StartFile, this.StartRank];
 
 				if (startField.Piece == null)
 				{
-					throw new Exception("Invalid argument, no piece found at given location, file: " + this.StartFile + ", rank: " + this.StartRank);
+					throw new Exception("Invalid argument, no piece found at given location, file: " + this.StartFile + ", rank: " + this.StartRank + 1);
 				}
 
 				this.White = startField.Piece.White;

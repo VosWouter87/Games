@@ -20,7 +20,7 @@ namespace Engine
 		{
 			var pieceLetter = this.Piece == null ? "" : this.Piece.Letter().ToString();
 			var fileLetter = (char)(this.File + Constants.FileLetterOffset);
-			var rankNumber = (char)(this.Rank + Constants.RankNumberOffset);
+			var rankNumber = (char)(this.Rank + Constants.RankNumberOffset + 1);
 			return pieceLetter + fileLetter + rankNumber;
 		}
 	}

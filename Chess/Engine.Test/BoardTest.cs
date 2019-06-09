@@ -28,23 +28,18 @@ namespace Engine.Test
 		public void DynamicPosition_CalculateMoves_MoveSet()
 		{
 			// Arrange
-			var expected = new List<int>(new int[] {  });
-#pragma warning disable CRRSP01 // A misspelled word has been found
-			var board = new Board(@"k5r1/p2bppp1/N2pq3/4p3/2Pn4/4B3/P1P2PPP/1R3QK1 b - - 2 35");
-#pragma warning restore CRRSP01 // A misspelled word has been found
+			var expected = new List<int>(new int[] { 6425834, 6426410, 6425706, 6424682, 6424106, 7211355, 7210331, 7209755, 7210075, 7217819, 7211099, 7408364, 7407916, 7407404, 7415084, 7408492, 7408556, 7408620, 7408876, 7409324, 7407980, 7407532, 7407084, 7342965, 7342453, 7343030, 7342518, 7475135, 7475071, 7475007, 7474943, 7474879, 7474815, 7474687, 7474175, 7473663, 7473151, 7472639, 7480319 });
+			var board = new Board(@"k6r/p3ppp1/N1b1q3/3n4/2Pp4/4B1P1PP3PKP/1R3Q2 b k c3 2 35");
 
 			// Act
 			var moves = board.CalculateMoves();
 
 			// Assert
-			expected.Clear();
-			//Assert.AreEqual(expected.Count, moves.Count);
+			Assert.AreEqual(expected.Count, moves.Count);
 			for (var i = 0; i < moves.Count; i++)
 			{
-				expected.Add(moves[i].ToInt());
-				//Assert.AreEqual(expected[i], moves[i].ToInt());
+				Assert.AreEqual(expected[i], moves[i].ToInt());
 			}
-			Assert.AreEqual(20, expected.Count);
 		}
 
 		[TestMethod]

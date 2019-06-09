@@ -46,7 +46,7 @@ namespace Engine.Pieces
 
 			if (left >= 0)
 			{
-				var piece = Board.Active.Fields[this.Field.Rank + direction, left].Piece;
+				var piece = Board.Active.Fields[left, this.Field.Rank + direction].Piece;
 				if (piece != null && piece.White != white && piece is Pawn)
 					yield return new AttackCombo
 					{
@@ -58,7 +58,7 @@ namespace Engine.Pieces
 			var right = this.Field.File + 1;
 			if (right < Board.Size)
 			{
-				var piece = Board.Active.Fields[this.Field.Rank + direction, right].Piece;
+				var piece = Board.Active.Fields[right, this.Field.Rank + direction].Piece;
 				if (piece != null && piece.White != white && piece is Pawn)
 					yield return new AttackCombo
 					{
