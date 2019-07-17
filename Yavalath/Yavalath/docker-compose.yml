@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  yavalath:
+    image: ${DOCKER_REGISTRY}yavalath
+    build:
+      context: .
+      dockerfile: Yavalath\Dockerfile
