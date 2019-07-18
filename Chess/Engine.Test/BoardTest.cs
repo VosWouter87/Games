@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Engine.Test
@@ -26,7 +28,7 @@ namespace Engine.Test
 		{
 			// Arrange
 			var expected = new List<int>(new int[] { 6425834, 6426410, 6425706, 6424682, 6424106, 7211355, 7210331, 7209755, 7210075, 7217819, 7211099, 7408364, 7407916, 7407404, 7415084, 7408492, 7408556, 7408620, 7408876, 7409324, 7407980, 7407532, 7407084, 7342965, 7342453, 7343030, 7342518, 7475135, 7475071, 7475007, 7474943, 7474879, 7474815, 7474687, 7474175, 7473663, 7473151, 7472639, 7480319 });
-			var board = new Board(@"k6r/p3ppp1/N1b1q3/3n4/2Pp4/4B1P1PP3PKP/1R3Q2 b k c3 2 35");
+			var board = new Board(@"k6r/p3ppp1/N1b1q3/3n4/2Pp4/4B1P1/PP3PKP/1R3Q2 b k c3 2 35");
 
 			// Act
 			var moves = board.CalculateMoves();
@@ -58,7 +60,7 @@ namespace Engine.Test
 
 		private void AssertListsAreEqual(List<int> expected, List<int> actual)
 		{
-			Assert.AreEqual(expected.Count, actual.Count);
+			Assert.AreEqual(expected.Count, actual.Count, MoveListDifference(expected, actual));
 			expected.Sort();
 			actual.Sort();
 			for(var i = 0; i < expected.Count; i++)
@@ -68,6 +70,25 @@ namespace Engine.Test
 					actual[i],
 					$"Expected move: { new Move(expected[i]) }, actually got move: { new Move(actual[i]) } on index: { i }");
 			}
+		}
+
+		private string MoveListDifference(List<int> expected, List<int> actual)
+		{
+			var differences = new StringBuilder(Environment.NewLine);
+
+			var expectedButNotInActual = expected.Except(actual);
+			foreach(var ex in expectedButNotInActual)
+			{
+				differences.AppendLine("Move expected but not found in actual: " + new Move(ex));
+			}
+
+			var actualButNotInExpected = actual.Except(expected);
+			foreach (var act in actualButNotInExpected)
+			{
+				differences.AppendLine("Move not expected but found in actual: " + new Move(act));
+			}
+
+			return differences.ToString();
 		}
 	}
 }
