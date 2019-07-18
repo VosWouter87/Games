@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Engine.Test
@@ -10,18 +11,14 @@ namespace Engine.Test
 		public void DefaultPosition_CalculateMoves_OnlyPawnsAndKnightsCanMove()
 		{
 			// Arrange
-			var expected = new List<int>(new int[] { 5117064, 5116040, 5119664, 5118640, 5247105, 5247169, 5247625, 5247689, 5248145, 5248209, 5248665, 5248729, 5249185, 5249249, 5249705, 5249769, 5250225, 5250289, 5250745, 5250809 });
+			var expected = new List<int>(new int[] { 5248008, 5248520, 5117057, 5116929, 5248073, 5248585, 5248138, 5248650, 5248203, 5248715, 5248268, 5248780, 5248333, 5248845, 5117382, 5117254, 5248398, 5248910, 5248463, 5248975, });
 			var board = new Board(Board.Default);
 
 			// Act
 			var moves = board.CalculateMoves();
 
 			// Assert
-			Assert.AreEqual(expected.Count, moves.Count);
-			for (var i = 0; i < moves.Count; i++)
-			{
-				Assert.AreEqual(expected[i], moves[i].ToInt());
-			}
+			AssertListsAreEqual(expected, moves.Select(m => m.ToInt()).ToList());
 		}
 
 		[TestMethod]
@@ -35,28 +32,41 @@ namespace Engine.Test
 			var moves = board.CalculateMoves();
 
 			// Assert
-			Assert.AreEqual(expected.Count, moves.Count);
-			for (var i = 0; i < moves.Count; i++)
-			{
-				Assert.AreEqual(expected[i], moves[i].ToInt());
-			}
+			AssertListsAreEqual(expected, moves.Select(m => m.ToInt()).ToList());
 		}
 
 		[TestMethod]
 		public void KingUnderThreat_CalculateMoves_MoveSet()
 		{
 			// Arrange
-			var expected = new List<int>(new int[] { 4936981, 4936533 });
-			var board = new Board(@"rnb2rk1/ppp3pp/4b3/q1pN4/7n/1P1P1K1P/PBP1P1BP/1R1Q4 w - - 3 25");
+			var board = new Board(@"rnb2rk1/ppp3pp/3b4/q1pN4/7n/1P1P1K1P/PBP1P1BP/1R1Q4 w - - 3 25");
+			var expected = new List<Move>();
+			board.Fields[5, 2].Piece.MakeMove(board.Fields[4, 2], expected);
+			board.Fields[5, 2].Piece.MakeMove(board.Fields[4, 3], expected);
 
 			// Act
 			var moves = board.CalculateMoves();
 
 			// Assert
-			Assert.AreEqual(expected.Count, moves.Count);
-			for (var i = 0; i < moves.Count; i++)
+			AssertListsAreEqual(expected, moves);
+		}
+
+		private void AssertListsAreEqual(List<Move> expected, List<Move> actual)
+		{
+			AssertListsAreEqual(expected.Select(m => m.ToInt()).ToList(), actual.Select(m => m.ToInt()).ToList());
+		}
+
+		private void AssertListsAreEqual(List<int> expected, List<int> actual)
+		{
+			Assert.AreEqual(expected.Count, actual.Count);
+			expected.Sort();
+			actual.Sort();
+			for(var i = 0; i < expected.Count; i++)
 			{
-				Assert.AreEqual(expected[i], moves[i].ToInt());
+				Assert.AreEqual(
+					expected[i],
+					actual[i],
+					$"Expected move: { new Move(expected[i]) }, actually got move: { new Move(actual[i]) } on index: { i }");
 			}
 		}
 	}

@@ -38,10 +38,10 @@ namespace Engine
 			_active = this;
 		}
 
-		public Board(string ForsythEdwardsNotation)
+		public Board(string forsythEdwardsNotation)
 		{
 			_active = this;
-			var parts = ForsythEdwardsNotation.Split(' ');
+			var parts = forsythEdwardsNotation.Split(' ');
 
 			byte rank = (byte)Board.Size;
 			foreach (var line in parts[0].Split('/'))

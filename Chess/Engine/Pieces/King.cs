@@ -21,7 +21,7 @@ namespace Engine.Pieces
 
 		public override void CalculateMoves(List<Move> moves)
 		{
-			foreach (var offset in Piece.AdjacentOffsets)
+			foreach (var offset in Piece.AllSurroundingOffsets)
 			{
 				var rank = this.Field.Rank + offset.Rank;
 				var file = this.Field.File + offset.File;
@@ -46,7 +46,7 @@ namespace Engine.Pieces
 
 			if (left >= 0)
 			{
-				var piece = Board.Active.Fields[left, this.Field.Rank + direction].Piece;
+				var piece = Board.Active.Fields[left, targetRank].Piece;
 				if (piece != null && piece.White != white && piece is Pawn)
 					yield return new AttackCombo
 					{
@@ -58,7 +58,7 @@ namespace Engine.Pieces
 			var right = this.Field.File + 1;
 			if (right < Board.Size)
 			{
-				var piece = Board.Active.Fields[right, this.Field.Rank + direction].Piece;
+				var piece = Board.Active.Fields[right, targetRank].Piece;
 				if (piece != null && piece.White != white && piece is Pawn)
 					yield return new AttackCombo
 					{
