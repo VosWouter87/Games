@@ -137,14 +137,14 @@ namespace Engine
 			return board;
 		}
 
-		public bool ReadBit(int index)
+		private bool ReadBit(int index)
 		{
 			if (index < 64)
 				return (this._first & (1 << index)) == 1;
 			else return (this._second & (1 << (index - 64))) == 1;
 		}
 
-		public void WriteBit(int index, bool value)
+		private void WriteBit(int index, bool value)
 		{
 			if (value)
 			{
