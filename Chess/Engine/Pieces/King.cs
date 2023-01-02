@@ -35,10 +35,9 @@ namespace Engine.Pieces
 			}
 		}
 
-		public IEnumerable<AttackCombo> AnalyzeStatus()
+		public IEnumerable<AttackCombo> AnalyzeThreats(Board board)
 		{
-			var white = Board.Active.WhiteToMove;
-			var direction = white ? 1 : -1;
+			var direction = board.WhiteToMove ? 1 : -1;
 
 			// Check if pawns can strike the field.
 			byte targetRank = (byte)(this.Field.Rank + direction);
@@ -47,7 +46,7 @@ namespace Engine.Pieces
 			if (left >= 0)
 			{
 				var piece = Board.Active.Fields[left, targetRank].Piece;
-				if (piece != null && piece.White != white && piece is Pawn)
+				if (piece != null && piece.White != board.WhiteToMove && piece is Pawn)
 					yield return new AttackCombo
 					{
 						Attacker = piece,
@@ -59,7 +58,7 @@ namespace Engine.Pieces
 			if (right < Board.Size)
 			{
 				var piece = Board.Active.Fields[right, targetRank].Piece;
-				if (piece != null && piece.White != white && piece is Pawn)
+				if (piece != null && piece.White != board.WhiteToMove && piece is Pawn)
 					yield return new AttackCombo
 					{
 						Attacker = piece,
@@ -76,7 +75,7 @@ namespace Engine.Pieces
 				if (rank >= 0 && rank < Board.Size && file >= 0 && file < Board.Size)
 				{
 					var piece = Board.Active.Fields[file, rank].Piece;
-					if (piece != null && piece.White != white && piece is Knight)
+					if (piece != null && piece.White != board.WhiteToMove && piece is Knight)
 						yield return new AttackCombo
 						{
 							Attacker = piece,
@@ -95,7 +94,7 @@ namespace Engine.Pieces
 					Piece pinned = null;
 					var piece = Board.Active.Fields[file, rank].Piece;
 					if (piece != null)
-						if (piece.White != white)
+						if (piece.White != board.WhiteToMove)
 						{
 							if ((straight ? piece is Rook : piece is Bishop ) || (piece is Queen))
 								yield return new AttackCombo

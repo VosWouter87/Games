@@ -39,9 +39,9 @@ namespace Engine.Pieces
 			{
 				if (Board.Active.Fields[this.Field.File, targetRank].Piece == null)
 				{
-					moves.Add(new Move(this.Field.File, this.Field.Rank, this.Field.File, targetRank, this.White, false, KingStatus.Unknown, this.Letter()));
+					moves.Add(new Move(this.Field.File, this.Field.Rank, this.Field.File, targetRank, this.White, false, BoardStatus.Unknown, this.Letter()));
 					if (this.Field.Rank == this.StartRow() && Board.Active.Fields[this.Field.File, targetRank + direction].Piece == null)
-						moves.Add(new Move(this.Field.File, this.Field.Rank, this.Field.File, (byte)(targetRank + direction), this.White, false, KingStatus.Unknown, this.Letter()));
+						moves.Add(new Move(this.Field.File, this.Field.Rank, this.Field.File, (byte)(targetRank + direction), this.White, false, BoardStatus.Unknown, this.Letter()));
 				}
 			}
 			
@@ -50,7 +50,7 @@ namespace Engine.Pieces
 			{
 				var target = Board.Active.Fields[left, this.Field.Rank + direction];
 				if (target.Piece != null && target.Piece.White != this.White)
-					moves.Add(new Move(this.Field.File, this.Field.Rank, (byte)left, targetRank, this.White, true, KingStatus.Unknown, this.Letter()));
+					moves.Add(new Move(this.Field.File, this.Field.Rank, (byte)left, targetRank, this.White, true, BoardStatus.Unknown, this.Letter()));
 			}
 
 			var right = this.Field.File + 1;
@@ -58,7 +58,7 @@ namespace Engine.Pieces
 			{
 				var target = Board.Active.Fields[right, this.Field.Rank + direction];
 				if (target.Piece != null && target.Piece.White != this.White)
-					moves.Add(new Move(this.Field.File, this.Field.Rank, (byte)right, targetRank, this.White, true, KingStatus.Unknown, this.Letter()));
+					moves.Add(new Move(this.Field.File, this.Field.Rank, (byte)right, targetRank, this.White, true, BoardStatus.Unknown, this.Letter()));
 			}
 		}
 	}

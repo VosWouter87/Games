@@ -19,7 +19,7 @@ namespace Engine
 		public byte EndRank { get; }
 		public bool White { get; }
 		public bool Struck { get; }
-		public KingStatus Checked { get; set; }
+		public BoardStatus Checked { get; set; }
 		public char Letter { get; }
 		public CastlingOptions HasCastled { get; set; }
 
@@ -31,7 +31,7 @@ namespace Engine
 			this.EndRank = (byte)((move & 3584) >> 9);
 			this.White = (move & 4096) >> 12 == 1;
 			this.Struck = (move & 8192) >> 13 == 1;
-			this.Checked = (KingStatus)((move & 49152) >> 14);
+			this.Checked = (BoardStatus)((move & 49152) >> 14);
 			this.Letter = (char)((move & 8355840) >> 16);
 		}
 
@@ -65,15 +65,16 @@ namespace Engine
 
 				this.StartFile = (byte)(fullNotation[notationIndex++] - Constants.FileLetterOffset);
 				this.StartRank = (byte)(fullNotation[notationIndex++] - Constants.RankNumberOffset - 1);
+				var square = this.StartFile + this.StartRank * Board.Dimension;
+				var mask = 1UL << square;
+				var piece = board.GetPieceType(mask);
 
-				var startField = board.Fields[this.StartFile, this.StartRank];
-
-				if (startField.Piece == null)
+				if (piece == PieceType.None)
 				{
 					throw new Exception("Invalid argument, no piece found at given location, file: " + this.StartFile + ", rank: " + this.StartRank + 1);
 				}
 
-				this.White = startField.Piece.White;
+				this.White = (board.Whites & mask) > 0;
 
 				if (fullNotation[2] == 'x')
 				{
@@ -86,7 +87,7 @@ namespace Engine
 			}
 		}
 
-		public Move(byte startFile, byte startRank, byte endFile, byte endRank, bool white, bool struck, KingStatus status, char letter)
+		public Move(byte startFile, byte startRank, byte endFile, byte endRank, bool white, bool struck, BoardStatus status, char letter)
 		{
 			this.StartFile = startFile;
 			this.StartRank = startRank;

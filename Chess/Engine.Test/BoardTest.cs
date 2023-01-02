@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Engine;
 
 namespace Engine.Test
 {
@@ -20,7 +21,7 @@ namespace Engine.Test
 			var moves = board.CalculateMoves();
 
 			// Assert
-			AssertListsAreEqual(expected, moves.Select(m => m.ToInt()).ToList());
+			AssertListsAreEqual(expected, moves.ToList());
 		}
 
 		[TestMethod]
@@ -34,7 +35,7 @@ namespace Engine.Test
 			var moves = board.CalculateMoves();
 
 			// Assert
-			AssertListsAreEqual(expected, moves.Select(m => m.ToInt()).ToList());
+			AssertListsAreEqual(expected, moves.ToList());
 		}
 
 		[TestMethod]
@@ -42,15 +43,15 @@ namespace Engine.Test
 		{
 			// Arrange
 			var board = new Board(@"rnb2rk1/ppp3pp/3b4/q1pN4/7n/1P1P1K1P/PBP1P1BP/1R1Q4 w - - 3 25");
-			var expected = new List<Move>();
-			board.Fields[5, 2].Piece.MakeMove(board.Fields[4, 2], expected);
-			board.Fields[5, 2].Piece.MakeMove(board.Fields[4, 3], expected);
+			var expected = new List<int>();
+			//board.Fields[5, 2].Piece.MakeMove(board.Fields[4, 2], expected);
+			//board.Fields[5, 2].Piece.MakeMove(board.Fields[4, 3], expected);
 
 			// Act
 			var moves = board.CalculateMoves();
 
 			// Assert
-			AssertListsAreEqual(expected, moves);
+			AssertListsAreEqual(expected, moves.ToList());
 		}
 
 		private void AssertListsAreEqual(List<Move> expected, List<Move> actual)
@@ -63,7 +64,7 @@ namespace Engine.Test
 			Assert.AreEqual(expected.Count, actual.Count, MoveListDifference(expected, actual));
 			expected.Sort();
 			actual.Sort();
-			for(var i = 0; i < expected.Count; i++)
+			for (var i = 0; i < expected.Count; i++)
 			{
 				Assert.AreEqual(
 					expected[i],
@@ -77,7 +78,7 @@ namespace Engine.Test
 			var differences = new StringBuilder(Environment.NewLine);
 
 			var expectedButNotInActual = expected.Except(actual);
-			foreach(var ex in expectedButNotInActual)
+			foreach (var ex in expectedButNotInActual)
 			{
 				differences.AppendLine("Move expected but not found in actual: " + new Move(ex));
 			}

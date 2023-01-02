@@ -11,18 +11,21 @@ namespace Engine
 	[Flags]
 	public enum CastlingOptions : short
 	{
-		WhiteKingSide = 0,
-		WhiteQueenSide = 1,
-		BlackKingSide = 2,
-		BlackQueenSide = 4,
+		WhiteKingSide = 1,
+		WhiteQueenSide = 2,
+		BlackKingSide = 4,
+		BlackQueenSide = 8,
 	}
 
-	public enum KingStatus
+	public enum BoardStatus
 	{
 		Unknown = 0,
-		Safe = 1,
-		Checked = 2,
-		Mated = 3,
-		Draw = 4,
+		Created = 1, // Before static data has been prepared.
+		Calculated = 2, // Basic board constants have been calculated
+		Safe = 3,
+		Checked = 4,
+		DoubleChecked = 5,
+		Mated = 6,
+		Draw = 7,
 	}
 }

@@ -2,6 +2,6 @@
 <Root Type="DevExpress.CodeRush.VSFeatures.SpellChecker.Options.SpellCheckerOptions">
   <Options Language="Neutral">
     <Enabled>True</Enabled>
-    <SupportedElements>XmlComments|Comments|VerbatimStrings|PublicIdentifiers|InternalIdentifiers|ProtectedInternalIdentifiers|ProtectedIdentifiers</SupportedElements>
+    <SupportedElements>XmlComments|Comments|Strings|VerbatimStrings|PublicIdentifiers|InternalIdentifiers|ProtectedInternalIdentifiers|ProtectedIdentifiers</SupportedElements>
   </Options>
 </Root>
