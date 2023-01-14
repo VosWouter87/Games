@@ -31,7 +31,7 @@ namespace Engine.Pieces
 		{
 			if (target.Piece == null || this.White != target.Piece.White)
 				// You cannot check yourself, so a king move ais always safe, otherwise we're not going to calculate.
-				moves.Add(new Move(this.Field.File, this.Field.Rank, target.File, target.Rank, this.White, target.Piece != null && this.White != target.Piece.White, this is King ? KingStatus.Safe : KingStatus.Unknown, this.Letter()));
+				moves.Add(new Move(this.Field.File, this.Field.Rank, target.File, target.Rank, this.White, target.Piece != null && this.White != target.Piece.White, this is King ? BoardStatus.Safe : BoardStatus.Unknown, this.Letter()));
 		}
 
 		public void GetMovesDiagonally(List<Move> moves)
@@ -83,7 +83,7 @@ namespace Engine.Pieces
 			{
 				var piece = Board.Active.Fields[sourceRank, target.File].Piece;
 				if (piece != null && piece.White == white && piece is Pawn)
-					moves.Add(new Move(piece.Field.Rank, piece.Field.File, target.Rank, target.File, white, false, KingStatus.Unknown, piece.Letter()));
+					moves.Add(new Move(piece.Field.Rank, piece.Field.File, target.Rank, target.File, white, false, BoardStatus.Unknown, piece.Letter()));
 			}
 
 			sourceRank = sourceRank + direction;
@@ -91,7 +91,7 @@ namespace Engine.Pieces
 			{
 				var source = Board.Active.Fields[sourceRank, target.File];
 				if (source.Piece != null && source.Piece.White == white && source.Piece is Pawn)
-					moves.Add(new Move(source.Rank, source.File, target.Rank, target.File, white, false, KingStatus.Unknown, source.Piece.Letter()));
+					moves.Add(new Move(source.Rank, source.File, target.Rank, target.File, white, false, BoardStatus.Unknown, source.Piece.Letter()));
 			}
 
 			foreach (var jump in KnightJumps)
@@ -103,7 +103,7 @@ namespace Engine.Pieces
 				{
 					var piece = Board.Active.Fields[file, rank].Piece;
 					if (piece != null && piece.White == white && piece is Knight)
-						moves.Add(new Move((byte)rank, (byte)file, target.Rank, target.File, white, false, KingStatus.Unknown, piece.Letter()));
+						moves.Add(new Move((byte)rank, (byte)file, target.Rank, target.File, white, false, BoardStatus.Unknown, piece.Letter()));
 				}
 			}
 			
@@ -118,7 +118,7 @@ namespace Engine.Pieces
 					if (piece != null)
 					{
 						if (piece.White == white && ((straight ? piece is Rook : piece is Bishop) || piece is Queen))
-							moves.Add(new Move(file, rank, target.Rank, target.File, white, false, KingStatus.Unknown, piece.Letter()));
+							moves.Add(new Move(file, rank, target.Rank, target.File, white, false, BoardStatus.Unknown, piece.Letter()));
 
 						// Never continue after a piece has been encountered.
 						break;
