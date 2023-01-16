@@ -28,52 +28,55 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.field = new Field(FieldType.Normal);
-			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-			this.newGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.menuStrip1.SuspendLayout();
-			this.SuspendLayout();
-			// 
-			// button1
-			// 
-			this.field.Location = new System.Drawing.Point(41, 42);
-			this.field.Name = "button1";
-			this.field.Size = new System.Drawing.Size(75, 23);
-			this.field.TabIndex = 0;
-			this.field.Text = "button1";
-			this.field.UseVisualStyleBackColor = true;
-			// 
-			// menuStrip1
-			// 
-			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+      this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+      this.newGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.board = new System.Windows.Forms.PictureBox();
+      this.menuStrip1.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.board)).BeginInit();
+      this.SuspendLayout();
+      // 
+      // menuStrip1
+      // 
+      this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+      this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newGameToolStripMenuItem});
-			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(493, 24);
-			this.menuStrip1.TabIndex = 1;
-			this.menuStrip1.Text = "menuStrip1";
-			// 
-			// newGameToolStripMenuItem
-			// 
-			this.newGameToolStripMenuItem.Name = "newGameToolStripMenuItem";
-			this.newGameToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
-			this.newGameToolStripMenuItem.Text = "New Game";
-			this.newGameToolStripMenuItem.Click += new System.EventHandler(this.NewGameToolStripMenuItem_Click);
-			// 
-			// CantStop
-			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(493, 414);
-			this.Controls.Add(this.field);
-			this.Controls.Add(this.menuStrip1);
-			this.MainMenuStrip = this.menuStrip1;
-			this.Name = "CantStop";
-			this.Text = "Can\'t Stop";
-			this.menuStrip1.ResumeLayout(false);
-			this.menuStrip1.PerformLayout();
-			this.ResumeLayout(false);
-			this.PerformLayout();
+      this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+      this.menuStrip1.Name = "menuStrip1";
+      this.menuStrip1.Size = new System.Drawing.Size(657, 28);
+      this.menuStrip1.TabIndex = 1;
+      this.menuStrip1.Text = "menuStrip1";
+      // 
+      // newGameToolStripMenuItem
+      // 
+      this.newGameToolStripMenuItem.Name = "newGameToolStripMenuItem";
+      this.newGameToolStripMenuItem.Size = new System.Drawing.Size(96, 24);
+      this.newGameToolStripMenuItem.Text = "New Game";
+      this.newGameToolStripMenuItem.Click += new System.EventHandler(this.NewGameToolStripMenuItem_Click);
+      // 
+      // board
+      // 
+      this.board.Location = new System.Drawing.Point(0, 31);
+      this.board.Name = "board";
+      this.board.Size = new System.Drawing.Size(624, 362);
+      this.board.TabIndex = 2;
+      this.board.TabStop = false;
+      // 
+      // CantStop
+      // 
+      this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+      this.ClientSize = new System.Drawing.Size(657, 510);
+      this.Controls.Add(this.board);
+      this.Controls.Add(this.menuStrip1);
+      this.MainMenuStrip = this.menuStrip1;
+      this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+      this.Name = "CantStop";
+      this.Text = "Can\'t Stop";
+      this.menuStrip1.ResumeLayout(false);
+      this.menuStrip1.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.board)).EndInit();
+      this.ResumeLayout(false);
+      this.PerformLayout();
 
 		}
 
@@ -83,9 +86,10 @@
 		{
 		}
 
-		private Field field;
+		//private Line field;
 		private System.Windows.Forms.MenuStrip menuStrip1;
 		private System.Windows.Forms.ToolStripMenuItem newGameToolStripMenuItem;
-	}
+        private System.Windows.Forms.PictureBox board;
+    }
 }
 

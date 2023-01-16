@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:tns1="MTRANS_WEB" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdlns="MTRANS_WEB" xmlns:tns="MTRANS_WEB" name="wsPrcSATSOAP" targetNamespace="MTRANS_WEB" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="MTRANS_WEB">
+      <xsd:element name="wsPrcSATSOAP.Execute">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Clicod" type="xsd:int" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="Clipsw" type="xsd:string" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="Ediprocod" type="xsd:short" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="Datosentrada" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="wsPrcSATSOAP.ExecuteResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Respuesta" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="object">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Request" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </types>
+  <message name="wsPrcSATSOAP.ExecuteSoapIn">
+    <part name="parameters" element="tns:wsPrcSATSOAP.Execute" />
+  </message>
+  <message name="wsPrcSATSOAP.ExecuteSoapOut">
+    <part name="parameters" element="tns:wsPrcSATSOAP.ExecuteResponse" />
+  </message>
+  <portType name="wsPrcSATSOAPSoapPort">
+    <operation name="Execute">
+      <input message="tns:wsPrcSATSOAP.ExecuteSoapIn" />
+      <output message="tns:wsPrcSATSOAP.ExecuteSoapOut" />
+    </operation>
+  </portType>
+  <binding name="wsPrcSATSOAPSoapBinding" type="tns:wsPrcSATSOAPSoapPort">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="Execute">
+      <soap:operation soapAction="MTRANS_WEBaction/AWSPRCSATSOAP.Execute" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="wsPrcSATSOAP">
+    <port name="wsPrcSATSOAPSoapPort" binding="tns:wsPrcSATSOAPSoapBinding">
+      <soap:address location="http://seguimientos.gallastegui.com//awsprcsatsoap.aspx" />
+    </port>
+  </service>
+</definitions>
